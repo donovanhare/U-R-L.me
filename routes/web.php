@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::post('/', 'ShortenerController@index');
+Route::post('/', 'ShortenerController@createURL');

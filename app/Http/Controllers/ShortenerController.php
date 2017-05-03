@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostURL;
 
+use App\URL;
+
 class ShortenerController extends Controller
 {
     public function __construct()
@@ -17,8 +19,17 @@ class ShortenerController extends Controller
         return view('home');
     }
 
-    public function createURL(PostURL $request, $URL)
+    public function createURL(PostURL $request)
     {
-    	# code...
+    	# Check against URL Blacklist
+        $shortener = new URL;
+
+        $shortener->uid = Auth::user()->id;
+        $shortener->source = substr(md5(uniqid(mt_rand(), true)), 0, 7);
+        $shortener->target = $request->url;
+
+        $shortener->save();
+
+        return view('home');
     }
 }
