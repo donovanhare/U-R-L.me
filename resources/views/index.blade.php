@@ -9,12 +9,13 @@
 
                 <div class="panel-body">
                     Welcome to U-R-L.me!
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Shortern URL...">
+                    <form class="input-group" method="POST" action="/new">
+                      {{ csrf_field() }}
+                      <input type="text" class="form-control" placeholder="Shortern URL..." name="url">
                       <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
+                        <button class="btn btn-default" type="submit">Go!</button>
                       </span>
-                    </div><!-- /input-group -->
+                    </form><!-- /input-group -->
                 </div>
             </div>
         </div>
