@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PostURL;
 
 use Auth;
-use App\URL as URLs;
+use App\Link as Links;
 
 class ShortenerController extends Controller
 {
@@ -20,24 +20,25 @@ class ShortenerController extends Controller
         return view('home');
     }
 
-    public function createURL(PostURL $request)
+    public function createLink(PostURL $request)
     {
-    	# Check against URL Blacklist #while source!=unique gen new
-        $shortener = new URL;
+    	# Check against Link Blacklist #while source!=unique gen new
+        $shortener = new Links;
         $shortener->userid = Auth::user()->id;
         $shortener->linkid = substr(md5(uniqid(mt_rand(), true)), 0, 7);
         $shortener->target = $request->input('url');
 
         $shortener->save();
 
-        return view('index');
+        return redirect('/');
     }
 
-    public function retrieveURL($linkid)
+    public function retrieveLink($linkid)
     {
         //grab any data here
-        $linkData = URLs::where('source', '=', $linkid)->first();
-        return $linkData->target;
+        $linkData = Links::where('linkid', '=', $linkid)->first();
+        return redirect()->away($linkData->target);
+        //return $linkData->target;
 
     }
 }

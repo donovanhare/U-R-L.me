@@ -19,6 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::post('/new', 'ShortenerController@createURL');
+Route::post('/new', 'ShortenerController@createLink');
 
-Route::get('{linkid}', 'ShortenerController@retrieveURL'); //linkID
+Route::get('/l/{linkid}', 'ShortenerController@retrieveLink');

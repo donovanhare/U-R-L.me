@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class URL extends Model
+class Link extends Model
 {
-    protected $table = 'urls';
+    protected $table = 'links';
 
     public function user()
     {
