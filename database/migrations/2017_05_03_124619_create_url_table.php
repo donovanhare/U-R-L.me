@@ -15,8 +15,8 @@ class CreateUrlTable extends Migration
     {
         Schema::create('URLs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('uid');
-            $table->string('source')->unique();
+            $table->integer('userid');
+            $table->string('linkid')->unique();
             $table->string('target');
             $table->timestamps();
         });

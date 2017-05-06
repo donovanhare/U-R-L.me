@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::post('/new', 'ShortenerController@createURL');
+
+Route::get('{linkid}', 'ShortenerController@retrieveURL'); //linkID
