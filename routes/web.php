@@ -29,3 +29,8 @@ Route::group(['prefix' => 'l'], function() {
 	Route::get('/{linkid}/information', 'ShortenerController@informationLink');
 
 });
+
+
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+    Route::get('/', 'ShortenerController@allLinks');
+});
