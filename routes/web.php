@@ -21,4 +21,11 @@ Route::get('/home', 'HomeController@index');
 
 Route::post('/new', 'ShortenerController@createLink');
 
-Route::get('/l/{linkid}', 'ShortenerController@retrieveLink');
+Route::get('/all', 'ShortenerController@allLinks');
+
+Route::group(['prefix' => 'l'], function() {
+
+    Route::get('/{linkid}', 'ShortenerController@retrieveLink');//should call redirectLink
+	Route::get('/{linkid}/information', 'ShortenerController@informationLink');
+
+});
