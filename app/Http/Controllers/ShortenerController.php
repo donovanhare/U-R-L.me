@@ -22,15 +22,20 @@ class ShortenerController extends Controller
 
     public function createLink(PostURL $request)
     {
-    	# Check against Link Blacklist #while source!=unique gen new
-        $shortener = new Links;
-        $shortener->userid = Auth::user()->id;
-        $shortener->linkid = substr(md5(uniqid(mt_rand(), true)), 0, 7);
-        $shortener->target = $request->input('url');
+    	# Check against Link Blacklist #while source!=unique gen new - have code that can be pasted into forum etc
+        if (pingAddress($request->input('url')) == 0) {
+            $shortener = new Links;
+            $shortener->userid = Auth::user()->id;
+            $shortener->linkid = substr(md5(uniqid(mt_rand(), true)), 0, 7);
+            $shortener->target = $request->input('url');
 
-        $shortener->save();
+            $shortener->save();
 
-        return redirect('/'.$shortener->target.'/infomation');//redirect to controller path idk
+            return redirect('/'.$shortener->target.'/infomation');//redirect to controller path idk
+        } else {
+            return redirect('/');//link dead
+        }
+        
     }
 
     public function retrieveLink($linkid)

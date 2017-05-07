@@ -59,6 +59,11 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @if(Auth::user()->admin == 1)
+                                    <li>
+                                        <a href="{{$app->make('url')->to('admin')}}">Admin Area</a>
+                                    </li>
+                                    @endif
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
