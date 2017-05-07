@@ -9,6 +9,16 @@
 
                 <div class="panel-body">
                     Welcome to U-R-L.me!
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <form class="input-group" method="POST" action="/new">
                       {{ csrf_field() }}
                       <input type="text" class="form-control" placeholder="Shortern URL..." name="url">
