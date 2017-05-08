@@ -21,15 +21,14 @@ Route::get('/home', 'HomeController@index');
 
 Route::post('/new', 'ShortenerController@createLink');
 
-Route::get('/all', 'ShortenerController@allLinks');
+Route::get('/manage/{linkid}', 'ShortenerController@manageLink');
+Route::get('/mylinks', 'ShortenerController@myLinks');
 
 Route::group(['prefix' => 'l'], function() {
 
     Route::get('/{linkid}', 'ShortenerController@retrieveLink');//should call redirectLink
-	Route::get('/{linkid}/information', 'ShortenerController@informationLink');
 
 });
-
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::get('/', 'ShortenerController@allLinks');

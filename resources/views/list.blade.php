@@ -27,8 +27,8 @@
                                     <a href="{{$app->make('url')->to('/l/').'/'.$link->linkid}}">{{$link->linkid}}</a>
                                 </td>
                                 <td>
-                                    <a href="#">Edit</a>, 
-                                    <a href="#">Delete</a> 
+                                    <a href="{{$app->make('url')->to('/manage/').'/'.$link->linkid}}">Edit</a>, 
+                                    <a href="{{$app->make('url')->to('/delete/').'/'.$link->linkid}}">Delete</a> 
                                 </td>
                             </tr>
                             @endforeach
