@@ -15,7 +15,7 @@
                         <div class="form-group">
                             <label for="sel1" class="col-sm-3 control-label">Link</label>
                             <div class="col-sm-5">
-                              <a href="{{$app->make('url')->to('/l/').'/'.$linkid}}">{{$app->make('url')->to('/l/').'/'.$linkid}}</a>
+                              <a href="{{$app->make('url')->to('/l/').'/'.$link->linkid}}">{{$app->make('url')->to('/l/').'/'.$link->linkid}}</a>
                             </div>
                         </div>
 
@@ -24,14 +24,14 @@
                         <div class="form-group">
                             <label for="sel1" class="col-sm-3 control-label">Identifier</label>
                             <div class="col-sm-5">
-                              <p>{{$linkid}}</p>
+                              <p>{{$link->linkid}}</p>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="sel1" class="col-sm-3 control-label">Target</label>
                             <div class="col-sm-5">
-                              <a href="{{$target}}">{{$target}}</a>
+                              <a href="{{$link->target}}">{{$link->target}}</a>
                             </div>
                         </div>
 
@@ -52,6 +52,33 @@
                         </div>
 
                     </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Analytics</div>
+
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Time</th>
+                            <th>IP</th>
+                        </tr>
+                        @forelse($analytics as $analytic)
+                        <tr>
+                            <td>{{$analytic->id}}</td>
+                            <td>{{$analytic->created_at}}</td>
+                            <td>{{$analytic->ip}}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td>Nothing to show.</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        @endforelse
+                    </table>
                 </div>
             </div>
         </div>

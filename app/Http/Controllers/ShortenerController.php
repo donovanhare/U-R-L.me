@@ -7,6 +7,7 @@ use App\Http\Requests\PostURL;
 
 use Auth;
 use App\Link as Links;
+use App\Analytics as Analytic;
 
 class ShortenerController extends Controller
 {
@@ -39,15 +40,20 @@ class ShortenerController extends Controller
         
     }
 
-    public function retrieveLink($linkid)
+    public function retrieveLink(Request $request, $linkid)
     {
-        //grab any data here
+        //grab any data here if not found redirect to home
         $linkData = Links::where('linkid', '=', $linkid)->first();
 
         //Add HTTP to begining of link if stored without it
         if (strpos($linkData->target, "http://") === False && strpos($linkData->target, "https://") === False) {
             $linkData->target = "http://" . $linkData->target;
         }
+
+        $Analytics = new Analytic;
+        $Analytics->linkid = $linkData->id;
+        $Analytics->ip = $request->ip();
+        $Analytics->save();
 
         return redirect()->away($linkData->target);
         //return $linkData->target;
@@ -62,9 +68,11 @@ class ShortenerController extends Controller
 
     public function manageLink($linkid)
     {
-        $manageData = Links::where('linkid', '=', $linkid)->first();
-        if (Auth::user()->id == $manageData->userid || Auth::user()->admin == 1) {
-            return view('manage', $manageData);
+        $linkData = Links::where('linkid', '=', $linkid)->first();
+        if (Auth::user()->id == $linkData->userid || Auth::user()->admin == 1) {
+            $data['link'] = $linkData;
+            $data['analytics'] = $linkData->analytics;
+            return view('manage', $data);
         } else {
             return redirect('/');
         }
