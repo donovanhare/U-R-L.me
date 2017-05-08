@@ -19,7 +19,7 @@
                         </div>
                     @endif
 
-                    <form class="input-group" method="POST" action="/new">
+                    <form class="input-group" method="POST" action="/create">
                       {{ csrf_field() }}
                       <input type="text" class="form-control" placeholder="Shortern URL..." name="url">
                       <span class="input-group-btn">
