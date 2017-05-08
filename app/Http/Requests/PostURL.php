@@ -23,6 +23,14 @@ class PostURL extends FormRequest
         return false;
     }
 
+    public function messages()
+{
+    return [
+        'url.required' => 'Unfortunately, we can\'t shorten nothing. Please supply us with a URL (https://example.com)! ',
+        'url' => 'The URL that you\'ve supplied is invalid, please use the following format (https://example.com) and try again.',
+    ];
+}
+
     /**
      * Get the validation rules that apply to the request.
      *
