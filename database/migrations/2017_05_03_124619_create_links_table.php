@@ -18,6 +18,7 @@ class CreateLinksTable extends Migration
             $table->integer('userid');
             $table->string('linkid')->unique();
             $table->string('target');
+            $table->ipAddress('ip');
             $table->timestamps();
         });
     }

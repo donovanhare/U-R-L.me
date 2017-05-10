@@ -28,6 +28,6 @@ class CreateAnalyticsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('analytics');
     }
 }

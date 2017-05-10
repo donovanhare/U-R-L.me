@@ -30,6 +30,7 @@ class ShortenerController extends Controller
             $shortener->userid = Auth::user()->id;
             $shortener->linkid = substr(md5(uniqid(mt_rand(), true)), 0, 7);
             $shortener->target = $request->input('url');
+            $shortener->ip = $request->ip();
 
             $shortener->save();
 
