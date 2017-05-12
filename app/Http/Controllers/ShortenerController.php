@@ -34,7 +34,7 @@ class ShortenerController extends Controller
 
             $shortener->save();
 
-            return redirect('/manage/'.$shortener->linkid);//redirect to controller path idk
+            return redirect('/manage/'.$shortener->linkid);
         } else {
             return redirect('/');//link dead
         }

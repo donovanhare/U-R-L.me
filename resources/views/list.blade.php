@@ -18,7 +18,7 @@
                                 <th>Action</th>
                             </tr>
                             
-                            @foreach($links as $link)
+                            @forelse($links as $link)
                             <tr>
                                 <td>{{$link->id}}</td>
                                 <td>{{$link->user->first()->email}}</td>
@@ -31,7 +31,15 @@
                                     <a href="{{$app->make('url')->to('/delete/').'/'.$link->linkid}}">Delete</a> 
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td>No data found.</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            @endforelse
                         </table>
                     </div>
                 </div>
